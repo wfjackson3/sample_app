@@ -27,4 +27,16 @@ class User < ActiveRecord::Base
 	# Password validations.
 	validates_presence_of	:password
 	validates_length_of		:password, :within => 6..40
-end
+
+	before_save :encrypt_password
+
+	private
+		def encrypt_password
+			self.encrypted_password = encrypt(password)
+		end
+
+		def encrypt(string)
+			string # only a temp implementation!
+		end
+	end
+
